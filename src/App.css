@@ -100,3 +100,24 @@ body * {
   height: 16px;
   margin-right: 2px;
 }
+
+#keymap {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+#keymap ol {
+  padding: 0 10px;
+}
+
+#keymap ol li {
+  flex-direction: row;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+#keymap ol li strong {
+  color: black;
+}

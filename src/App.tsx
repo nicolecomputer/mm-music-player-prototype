@@ -4,6 +4,7 @@ import KeyboardEventHandler from '@infinium/react-keyboard-event-handler';
 
 function App() {
   const [selectedRow, setSelectedRow] = useState(0)
+  const [playing, setPlaying] = useState(false)
 
   const title = "Home"
 
@@ -12,7 +13,7 @@ function App() {
   return (
     <>
       <KeyboardEventHandler
-        handleKeys={['down', 'up']}
+        handleKeys={['down', 'up', 'space']}
         onKeyEvent={(key) => {
           switch (key) {
             case "down":
@@ -24,6 +25,9 @@ function App() {
               if (selectedRow > 0) {
                 setSelectedRow(selectedRow - 1)
               }
+              break;
+            case "space":
+              setPlaying(!playing)
               break;
             default:
               console.log("?????")
@@ -40,7 +44,7 @@ function App() {
             </div>
           </div>
           <div className="center">{title}</div>
-          <div className="right">⏯</div>
+          <div className="right">{playing ? "⏸" : "⏵"}</div>
         </header>
         <main>
           {rows.map((row, index) => {
@@ -65,6 +69,13 @@ function App() {
           </div>
 
         </footer>
+      </div>
+
+      <div id="keymap">
+        <ol>
+          <li><strong>Arrow keys: </strong> d-pad</li>
+          <li><strong>Space: </strong> start</li>
+        </ol>
       </div>
     </>
   )
