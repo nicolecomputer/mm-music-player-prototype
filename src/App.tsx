@@ -1,11 +1,37 @@
 import { useState } from 'react'
 import './App.css'
+import KeyboardEventHandler from '@infinium/react-keyboard-event-handler';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [selectedRow, setSelectedRow] = useState(0)
+
+  const title = "Home"
+
+  const rows = ["Songs", "Artists", "Albums", "Genres", "Settings"]
 
   return (
     <>
+      <KeyboardEventHandler
+        handleKeys={['down', 'up']}
+        onKeyEvent={(key) => {
+          switch (key) {
+            case "down":
+              if (selectedRow < rows.length - 1) {
+                setSelectedRow(selectedRow + 1)
+              }
+              break;
+            case "up":
+              if (selectedRow > 0) {
+                setSelectedRow(selectedRow - 1)
+              }
+              break;
+            default:
+              console.log("?????")
+              break
+          }
+        }} />
+
+
       <div id="music">
         <header>
           <div className="left">
@@ -13,15 +39,15 @@ function App() {
               <p>Music <span>Player</span></p>
             </div>
           </div>
-          <div className="center">Home</div>
+          <div className="center">{title}</div>
           <div className="right">⏯</div>
         </header>
         <main>
-          <div className="row">Songs</div>
-          <div className="row selected">Artists</div>
-          <div className="row">Albums</div>
-          <div className="row">Genres</div>
-          <div className="row">Settings</div>
+          {rows.map((row, index) => {
+            const isSelected = index == selectedRow;
+            const selectedClass = isSelected ? "selected" : ''
+            return <div key={index} className={`row ${selectedClass}`} >{row}</div>
+          })}
         </main>
         <footer>
           <div className="button-prompt">

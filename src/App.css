@@ -67,6 +67,7 @@ body * {
 
 #music main {
   flex: 1;
+  overflow-y: hidden;
 }
 
 #music main .row {
